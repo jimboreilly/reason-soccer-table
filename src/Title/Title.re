@@ -2,9 +2,9 @@
 let make = (~title) => {
   let style =
     ReactDOMRe.Style.make(
-      ~borderRadius="12px 12px 0px 0px;",
-      ~padding="12px;",
-      ~fontWeight="bold;",
+      ~borderRadius="12px 12px 0px 0px",
+      ~padding="12px",
+      ~fontWeight="bold",
       (),
     );
 
