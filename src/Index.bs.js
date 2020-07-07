@@ -1,14 +1,9 @@
 'use strict';
 
 var React = require("react");
-var ReactDom = require("react-dom");
-var Title$ReasonSoccerTable = require("./Container/Title.bs.js");
-var ContainerTest$ReasonSoccerTable = require("./Container/ContainerTest.bs.js");
+var ReactDOMRe = require("reason-react/src/legacy/ReactDOMRe.bs.js");
+var App$ReasonSoccerTable = require("./App/App.bs.js");
 var ExampleStyles$ReasonSoccerTable = require("./ExampleStyles.bs.js");
-var BlinkingGreeting$ReasonSoccerTable = require("./BlinkingGreeting/BlinkingGreeting.bs.js");
-var FetchedDogPictures$ReasonSoccerTable = require("./FetchedDogPictures/FetchedDogPictures.bs.js");
-var ReducerFromReactJSDocs$ReasonSoccerTable = require("./ReducerFromReactJSDocs/ReducerFromReactJSDocs.bs.js");
-var ReasonUsingJSUsingReason$ReasonSoccerTable = require("./ReasonUsingJSUsingReason/ReasonUsingJSUsingReason.bs.js");
 
 var style = document.createElement("style");
 
@@ -30,22 +25,7 @@ function makeContainer(text) {
   return content;
 }
 
-ReactDom.render(React.createElement(BlinkingGreeting$ReasonSoccerTable.make, {
-          children: "Hello!"
-        }), makeContainer("Blinking Greeting"));
-
-ReactDom.render(React.createElement(ReducerFromReactJSDocs$ReasonSoccerTable.make, {}), makeContainer("Reducer From ReactJS Docs"));
-
-ReactDom.render(React.createElement(FetchedDogPictures$ReasonSoccerTable.make, {}), makeContainer("Fetched Dog Pictures"));
-
-ReactDom.render(React.createElement(ReasonUsingJSUsingReason$ReasonSoccerTable.make, {}), makeContainer("Reason Using JS Using Reason"));
-
-ReactDom.render(React.createElement(ContainerTest$ReasonSoccerTable.make, {
-          title: "test",
-          children: React.createElement(Title$ReasonSoccerTable.make, {
-                title: "also test"
-              })
-        }), makeContainer("Reason Using JS Using Reason"));
+ReactDOMRe.renderToElementWithId(React.createElement(App$ReasonSoccerTable.make, {}), "app");
 
 exports.style = style;
 exports.makeContainer = makeContainer;

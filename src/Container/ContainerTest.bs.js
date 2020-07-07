@@ -1,7 +1,7 @@
 'use strict';
 
 var React = require("react");
-var Title$ReasonSoccerTable = require("./Title.bs.js");
+var Title$ReasonSoccerTable = require("../Title/Title.bs.js");
 
 function ContainerTest(Props) {
   var title = Props.title;
