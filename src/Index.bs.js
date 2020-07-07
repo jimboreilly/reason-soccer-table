@@ -2,6 +2,8 @@
 
 var React = require("react");
 var ReactDom = require("react-dom");
+var Title$ReasonSoccerTable = require("./Container/Title.bs.js");
+var ContainerTest$ReasonSoccerTable = require("./Container/ContainerTest.bs.js");
 var ExampleStyles$ReasonSoccerTable = require("./ExampleStyles.bs.js");
 var BlinkingGreeting$ReasonSoccerTable = require("./BlinkingGreeting/BlinkingGreeting.bs.js");
 var FetchedDogPictures$ReasonSoccerTable = require("./FetchedDogPictures/FetchedDogPictures.bs.js");
@@ -37,6 +39,13 @@ ReactDom.render(React.createElement(ReducerFromReactJSDocs$ReasonSoccerTable.mak
 ReactDom.render(React.createElement(FetchedDogPictures$ReasonSoccerTable.make, {}), makeContainer("Fetched Dog Pictures"));
 
 ReactDom.render(React.createElement(ReasonUsingJSUsingReason$ReasonSoccerTable.make, {}), makeContainer("Reason Using JS Using Reason"));
+
+ReactDom.render(React.createElement(ContainerTest$ReasonSoccerTable.make, {
+          title: "test",
+          children: React.createElement(Title$ReasonSoccerTable.make, {
+                title: "also test"
+              })
+        }), makeContainer("Reason Using JS Using Reason"));
 
 exports.style = style;
 exports.makeContainer = makeContainer;
