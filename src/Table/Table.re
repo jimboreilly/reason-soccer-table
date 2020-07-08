@@ -1,42 +1,57 @@
-let tableHeader = () =>
+let tableHeader = () => {
+  let style = ReactDOMRe.Style.make(~fontWeight="normal", ());
+
   <tr>
-    <th />
-    <th> {React.string("Name")} </th>
-    <th> {React.string("Matches")} </th>
-    <th> {React.string("Wins")} </th>
-    <th> {React.string("Draws")} </th>
-    <th> {React.string("Losses")} </th>
-    <th> {React.string("Pts")} </th>
-    <th> {React.string("GF")} </th>
-    <th> {React.string("GA")} </th>
-    <th> {React.string("GD")} </th>
+    {[
+       "",
+       "Club",
+       "Matches",
+       "Wins",
+       "Draws",
+       "Losses",
+       "Pts",
+       "GF",
+       "GA",
+       "GD",
+     ]
+     |> List.map(headerName => <th style> {React.string(headerName)} </th>)
+     |> Array.of_list
+     |> ReasonReact.array}
   </tr>;
+};
 
 let calculatePoints = (r: TeamRecord.t) => 3 * r.wins + r.draws;
 
-let formatRecordRow = (position, r: TeamRecord.t) =>
+let transformRecordRow = (position, r: TeamRecord.t) => {
+  let style = ReactDOMRe.Style.make(~textAlign="right", ());
+
   <tr>
-    <td> {React.string(string_of_int(position + 1))} </td>
-    <td> {React.string(r.name)} </td>
-    <td> {React.string(string_of_int(r.wins + r.draws + r.losses))} </td>
-    <td> {React.string(string_of_int(r.wins))} </td>
-    <td> {React.string(string_of_int(r.draws))} </td>
-    <td> {React.string(string_of_int(r.losses))} </td>
-    <td> {React.string(string_of_int(calculatePoints(r)))} </td>
-    <td> {React.string(string_of_int(r.goalsFor))} </td>
-    <td> {React.string(string_of_int(r.goalsAgainst))} </td>
-    <td> {React.string(string_of_int(r.goalsFor - r.goalsAgainst))} </td>
+    {[
+       string_of_int(position + 1),
+       r.name,
+       string_of_int(r.wins + r.draws + r.losses),
+       string_of_int(r.wins),
+       string_of_int(r.draws),
+       string_of_int(r.losses),
+       string_of_int(calculatePoints(r)),
+       string_of_int(r.goalsFor),
+       string_of_int(r.goalsAgainst),
+       string_of_int(r.goalsFor - r.goalsAgainst),
+     ]
+     |> List.map(value => <td style> {React.string(value)} </td>)
+     |> Array.of_list
+     |> ReasonReact.array}
   </tr>;
+};
 
 [@react.component]
-let make = (~records) => {
+let make = (~records) =>
   <div>
     <table>
       {tableHeader()}
       {records
-       |> List.mapi(formatRecordRow)
+       |> List.mapi(transformRecordRow)
        |> Array.of_list
        |> ReasonReact.array}
     </table>
   </div>;
-};
