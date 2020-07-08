@@ -25,7 +25,40 @@ function App(Props) {
                 }));
 }
 
+var tableStub = {
+  hd: {
+    name: "Liverpool",
+    wins: 29,
+    draws: 2,
+    losses: 2,
+    goalsFor: 72,
+    goalsAgainst: 25
+  },
+  tl: {
+    hd: {
+      name: "Manchester City",
+      wins: 21,
+      draws: 3,
+      losses: 9,
+      goalsFor: 81,
+      goalsAgainst: 34
+    },
+    tl: {
+      hd: {
+        name: "Chelsea",
+        wins: 18,
+        draws: 6,
+        losses: 10,
+        goalsFor: 63,
+        goalsAgainst: 56
+      },
+      tl: /* [] */0
+    }
+  }
+};
+
 var make = App;
 
+exports.tableStub = tableStub;
 exports.make = make;
 /* react Not a pure module */
