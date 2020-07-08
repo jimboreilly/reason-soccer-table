@@ -1,13 +1,4 @@
-type teamRecord = {
-  name: string,
-  wins: int,
-  draws: int,
-  losses: int,
-  goalsFor: int,
-  goalsAgainst: int,
-};
-
-let tableStub = [
+let tableStub: list(TeamRecord.t) = [
   {
     name: "Liverpool",
     wins: 29,
@@ -30,24 +21,24 @@ let tableStub = [
     draws: 6,
     losses: 10,
     goalsFor: 63,
-    goalsAgainst: 56,
+    goalsAgainst: 46,
   },
 ];
 
 [@react.component]
 let make = () => {
   <div>
-    <Container title="Blinking Greeting">
-      <BlinkingGreeting> {React.string("Hello!")} </BlinkingGreeting>
-    </Container>
-    <Container title="Reducer From ReactJS Docs">
-      <ReducerFromReactJSDocs />
-    </Container>
-    <Container title="Fetched Dog Pictures">
-      <FetchedDogPictures />
-    </Container>
-    <Container title="Reason Using JS Using Reason">
-      <ReasonUsingJSUsingReason />
-    </Container>
-  </div>;
+     <Table records=tableStub /> </div>;
+    // </Container>
+    //   <ReasonUsingJSUsingReason />
+    // <Container title="Reason Using JS Using Reason">
+    // </Container>
+    //   <FetchedDogPictures />
+    // <Container title="Fetched Dog Pictures">
+    // </Container>
+    //   <ReducerFromReactJSDocs />
+    // <Container title="Reducer From ReactJS Docs">
+    // </Container>
+    //   <BlinkingGreeting> {React.string("Hello!")} </BlinkingGreeting>
+    // <Container title="Blinking Greeting">
 };
