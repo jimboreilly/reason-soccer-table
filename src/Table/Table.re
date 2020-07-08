@@ -1,5 +1,6 @@
 let tableHeader = () =>
   <tr>
+    <th />
     <th> {React.string("Name")} </th>
     <th> {React.string("Matches")} </th>
     <th> {React.string("Wins")} </th>
@@ -13,8 +14,9 @@ let tableHeader = () =>
 
 let calculatePoints = (r: TeamRecord.t) => 3 * r.wins + r.draws;
 
-let formatRecordRow = (r: TeamRecord.t) =>
+let formatRecordRow = (position, r: TeamRecord.t) =>
   <tr>
+    <td> {React.string(string_of_int(position + 1))} </td>
     <td> {React.string(r.name)} </td>
     <td> {React.string(string_of_int(r.wins + r.draws + r.losses))} </td>
     <td> {React.string(string_of_int(r.wins))} </td>
@@ -32,7 +34,7 @@ let make = (~records) => {
     <table>
       {tableHeader()}
       {records
-       |> List.map(formatRecordRow)
+       |> List.mapi(formatRecordRow)
        |> Array.of_list
        |> ReasonReact.array}
     </table>
