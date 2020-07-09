@@ -7,6 +7,7 @@ var React = require("react");
 function Table$Header(Props) {
   var style = {
     fontWeight: "normal",
+    padding: "20px 10px 10px 10px",
     textAlign: "center"
   };
   return React.createElement("tr", undefined, $$Array.of_list(List.map((function (headerName) {
@@ -55,13 +56,14 @@ function calculatePoints(r) {
 }
 
 var normalStyle = {
-  padding: "2px 20px 10px 10px",
-  textAlign: "right"
+  padding: "10px",
+  textAlign: "center"
 };
 
 var boldStyle = {
   fontWeight: "bold",
-  textAlign: "right"
+  padding: "10px",
+  textAlign: "center"
 };
 
 function recordRow(position, r) {

@@ -2,7 +2,12 @@ module Header = {
   [@react.component]
   let make = () => {
     let style =
-      ReactDOMRe.Style.make(~fontWeight="normal", ~textAlign="center", ());
+      ReactDOMRe.Style.make(
+        ~fontWeight="normal",
+        ~textAlign="center",
+        ~padding="20px 10px 10px 10px",
+        (),
+      );
 
     <tr>
       {["", "Club", "P", "W", "D", "L", "Pts", "GF", "GA", "GD"]
@@ -17,13 +22,14 @@ module Record = {
   let calculatePoints = (r: TeamRecord.t) => 3 * r.wins + r.draws;
 
   let normalStyle =
+    ReactDOMRe.Style.make(~textAlign="center", ~padding="10px", ());
+  let boldStyle =
     ReactDOMRe.Style.make(
-      ~textAlign="right",
-      ~padding="2px 20px 10px 10px",
+      ~fontWeight="bold",
+      ~padding="10px",
+      ~textAlign="center",
       (),
     );
-  let boldStyle =
-    ReactDOMRe.Style.make(~fontWeight="bold", ~textAlign="right", ());
 
   let recordRow = (position, r: TeamRecord.t) => {
     <tr>
