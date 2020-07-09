@@ -21,29 +21,26 @@ module Header = {
 module Record = {
   let calculatePoints = (r: TeamRecord.t) => 3 * r.wins + r.draws;
 
-  let normalStyle =
-    ReactDOMRe.Style.make(~textAlign="center", ~padding="10px", ());
-  let boldStyle =
-    ReactDOMRe.Style.make(
-      ~fontWeight="bold",
-      ~padding="10px",
-      ~textAlign="center",
-      (),
+  let style = ReactDOMRe.Style.make(~textAlign="center", ~padding="10px", ());
+  let bold =
+    ReactDOMRe.Style.combine(
+      style,
+      ReactDOMRe.Style.make(~fontWeight="bold", ()),
     );
 
   let recordRow = (position, r: TeamRecord.t) => {
     <tr>
       {[
-         (string_of_int(position + 1), normalStyle),
-         (r.name, normalStyle),
-         (string_of_int(r.wins + r.draws + r.losses), normalStyle),
-         (string_of_int(r.wins), normalStyle),
-         (string_of_int(r.draws), normalStyle),
-         (string_of_int(r.losses), normalStyle),
-         (string_of_int(calculatePoints(r)), boldStyle),
-         (string_of_int(r.goalsFor), normalStyle),
-         (string_of_int(r.goalsAgainst), normalStyle),
-         (string_of_int(r.goalsFor - r.goalsAgainst), normalStyle),
+         (string_of_int(position + 1), style),
+         (r.name, style),
+         (string_of_int(r.wins + r.draws + r.losses), style),
+         (string_of_int(r.wins), style),
+         (string_of_int(r.draws), style),
+         (string_of_int(r.losses), style),
+         (string_of_int(calculatePoints(r)), bold),
+         (string_of_int(r.goalsFor), style),
+         (string_of_int(r.goalsAgainst), style),
+         (string_of_int(r.goalsFor - r.goalsAgainst), style),
        ]
        |> List.map(((v, style)) => <td style> {React.string(v)} </td>)
        |> Array.of_list

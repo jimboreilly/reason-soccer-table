@@ -55,16 +55,14 @@ function calculatePoints(r) {
   return Math.imul(3, r.wins) + r.draws | 0;
 }
 
-var normalStyle = {
+var style = {
   padding: "10px",
   textAlign: "center"
 };
 
-var boldStyle = {
-  fontWeight: "bold",
-  padding: "10px",
-  textAlign: "center"
-};
+var bold = Object.assign({}, style, {
+      fontWeight: "bold"
+    });
 
 function recordRow(position, r) {
   return React.createElement("tr", undefined, $$Array.of_list(List.map((function (param) {
@@ -74,52 +72,52 @@ function recordRow(position, r) {
                       }), {
                       hd: [
                         String(position + 1 | 0),
-                        normalStyle
+                        style
                       ],
                       tl: {
                         hd: [
                           r.name,
-                          normalStyle
+                          style
                         ],
                         tl: {
                           hd: [
                             String((r.wins + r.draws | 0) + r.losses | 0),
-                            normalStyle
+                            style
                           ],
                           tl: {
                             hd: [
                               String(r.wins),
-                              normalStyle
+                              style
                             ],
                             tl: {
                               hd: [
                                 String(r.draws),
-                                normalStyle
+                                style
                               ],
                               tl: {
                                 hd: [
                                   String(r.losses),
-                                  normalStyle
+                                  style
                                 ],
                                 tl: {
                                   hd: [
                                     String(calculatePoints(r)),
-                                    boldStyle
+                                    bold
                                   ],
                                   tl: {
                                     hd: [
                                       String(r.goalsFor),
-                                      normalStyle
+                                      style
                                     ],
                                     tl: {
                                       hd: [
                                         String(r.goalsAgainst),
-                                        normalStyle
+                                        style
                                       ],
                                       tl: {
                                         hd: [
                                           String(r.goalsFor - r.goalsAgainst | 0),
-                                          normalStyle
+                                          style
                                         ],
                                         tl: /* [] */0
                                       }
@@ -158,8 +156,8 @@ function Table$Record(Props) {
 
 var Record = {
   calculatePoints: calculatePoints,
-  normalStyle: normalStyle,
-  boldStyle: boldStyle,
+  style: style,
+  bold: bold,
   recordRow: recordRow,
   separatingRow: separatingRow,
   rowWithSeparater: rowWithSeparater,
@@ -198,4 +196,4 @@ var make = Table;
 exports.Header = Header;
 exports.Record = Record;
 exports.make = make;
-/* react Not a pure module */
+/* bold Not a pure module */
