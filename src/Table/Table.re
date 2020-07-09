@@ -1,19 +1,9 @@
 let tableHeader = () => {
-  let style = ReactDOMRe.Style.make(~fontWeight="normal", ());
+  let style =
+    ReactDOMRe.Style.make(~fontWeight="normal", ~textAlign="center", ());
 
   <tr>
-    {[
-       "",
-       "Club",
-       "Matches",
-       "Wins",
-       "Draws",
-       "Losses",
-       "Pts",
-       "GF",
-       "GA",
-       "GD",
-     ]
+    {["", "Club", "P", "W", "D", "L", "Pts", "GF", "GA", "GD"]
      |> List.map(headerName => <th style> {React.string(headerName)} </th>)
      |> Array.of_list
      |> ReasonReact.array}
@@ -22,34 +12,79 @@ let tableHeader = () => {
 
 let calculatePoints = (r: TeamRecord.t) => 3 * r.wins + r.draws;
 
-let transformRecordRow = (position, r: TeamRecord.t) => {
-  let style = ReactDOMRe.Style.make(~textAlign="right", ());
+let recordRow = (position, r: TeamRecord.t) => {
+  let normalStyle =
+    ReactDOMRe.Style.make(
+      ~textAlign="right",
+      ~padding="2px 20px 10px 10px",
+      (),
+    );
   let boldStyle =
     ReactDOMRe.Style.make(~fontWeight="bold", ~textAlign="right", ());
   <tr>
-    <td style> {React.string(string_of_int(position + 1))} </td>
-    <td> {React.string(r.name)} </td>
-    <td style>
-      {React.string(string_of_int(r.wins + r.draws + r.losses))}
-    </td>
-    <td style> {React.string(string_of_int(r.wins))} </td>
-    <td style> {React.string(string_of_int(r.draws))} </td>
-    <td style> {React.string(string_of_int(r.losses))} </td>
-    <td style=boldStyle>
-      {React.string(string_of_int(calculatePoints(r)))}
-    </td>
-    <td style> {React.string(string_of_int(r.goalsFor))} </td>
-    <td style> {React.string(string_of_int(r.goalsAgainst))} </td>
-    <td style>
-      {React.string(string_of_int(r.goalsFor - r.goalsAgainst))}
-    </td>
+    {[
+       (string_of_int(position + 1), normalStyle),
+       (r.name, normalStyle),
+       (string_of_int(r.wins + r.draws + r.losses), normalStyle),
+       (string_of_int(r.wins), normalStyle),
+       (string_of_int(r.draws), normalStyle),
+       (string_of_int(r.losses), normalStyle),
+       (string_of_int(calculatePoints(r)), boldStyle),
+       (string_of_int(r.goalsFor), normalStyle),
+       (string_of_int(r.goalsAgainst), normalStyle),
+       (string_of_int(r.goalsFor - r.goalsAgainst), normalStyle),
+     ]
+     |> List.map(((v, style)) => <td style> {React.string(v)} </td>)
+     |> Array.of_list
+     |> ReasonReact.array}
   </tr>;
 };
 
+let rowWithSeparater = (position, r: TeamRecord.t) => {
+  let separatingRow =
+    ReactDOMRe.Style.make(
+      ~borderTop="1px rgba(0, 0, 0, 0.2) solid",
+      ~padding="0px 0px -20px -20px",
+      ~marginLeft="-20%",
+      (),
+    );
+  let line = <tr style=separatingRow />;
+  ReactDOMRe.createElement(
+    ReasonReact.fragment,
+    [|line, recordRow(position, r)|],
+  );
+};
+
+let transformRecordRow = (position, r: TeamRecord.t) => {
+  switch (position) {
+  | 0 => recordRow(position, r)
+  | _ => rowWithSeparater(position, r)
+  };
+};
+
 [@react.component]
-let make = (~records) =>
-  <div>
-    <table>
+let make = (~records) => {
+  let style =
+    ReactDOMRe.Style.make(
+      ~backgroundColor="white",
+      ~borderCollapse="collapse",
+      ~margin="0 auto",
+      ~padding="100px 0px",
+      ~width="95%",
+      (),
+    );
+
+  let containerStyle =
+    ReactDOMRe.Style.make(
+      ~alignItems="center",
+      ~backgroundColor="white",
+      ~borderRadius="15px",
+      ~width="700px",
+      (),
+    );
+
+  <div style=containerStyle>
+    <table style>
       {tableHeader()}
       {records
        |> List.mapi(transformRecordRow)
@@ -57,3 +92,4 @@ let make = (~records) =>
        |> ReasonReact.array}
     </table>
   </div>;
+};
