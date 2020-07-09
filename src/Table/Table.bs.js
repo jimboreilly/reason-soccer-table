@@ -7,8 +7,7 @@ var React = require("react");
 function Table$Header(Props) {
   var style = {
     fontWeight: "normal",
-    padding: "20px 10px 10px 10px",
-    textAlign: "center"
+    padding: "20px 10px 10px 10px"
   };
   return React.createElement("tr", undefined, $$Array.of_list(List.map((function (headerName) {
                         return React.createElement("th", {
@@ -56,9 +55,12 @@ function calculatePoints(r) {
 }
 
 var style = {
-  padding: "10px",
-  textAlign: "center"
+  padding: "10px"
 };
+
+var leftAligned = Object.assign({}, style, {
+      textAlign: "left"
+    });
 
 var bold = Object.assign({}, style, {
       fontWeight: "bold"
@@ -77,7 +79,7 @@ function recordRow(position, r) {
                       tl: {
                         hd: [
                           r.name,
-                          style
+                          leftAligned
                         ],
                         tl: {
                           hd: [
@@ -132,13 +134,10 @@ function recordRow(position, r) {
                     })));
 }
 
-var separatingRow = {
-  borderTop: "1px rgba(0, 0, 0, 0.2) solid",
-  marginLeft: "-20%",
-  padding: "0px 0px -20px -20px"
-};
-
 function rowWithSeparater(position, r) {
+  var separatingRow = {
+    borderTop: "1px rgba(0, 0, 0, 0.2) solid"
+  };
   return React.createElement(React.Fragment, undefined, React.createElement("tr", {
                   style: separatingRow
                 }), recordRow(position, r));
@@ -157,20 +156,21 @@ function Table$Record(Props) {
 var Record = {
   calculatePoints: calculatePoints,
   style: style,
+  leftAligned: leftAligned,
   bold: bold,
   recordRow: recordRow,
-  separatingRow: separatingRow,
   rowWithSeparater: rowWithSeparater,
   make: Table$Record
 };
 
 function Table(Props) {
   var records = Props.records;
-  var style = {
+  var tableStyle = {
     backgroundColor: "white",
     borderCollapse: "collapse",
     margin: "0 auto",
     padding: "100px 0px",
+    textAlign: "center",
     width: "95%"
   };
   var containerStyle = {
@@ -182,7 +182,7 @@ function Table(Props) {
   return React.createElement("div", {
               style: containerStyle
             }, React.createElement("table", {
-                  style: style
+                  style: tableStyle
                 }, React.createElement(Table$Header, {}), $$Array.of_list(List.mapi((function (position, r) {
                             return React.createElement(Table$Record, {
                                         position: position,
@@ -196,4 +196,4 @@ var make = Table;
 exports.Header = Header;
 exports.Record = Record;
 exports.make = make;
-/* bold Not a pure module */
+/* leftAligned Not a pure module */

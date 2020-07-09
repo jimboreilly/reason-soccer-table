@@ -4,7 +4,6 @@ module Header = {
     let style =
       ReactDOMRe.Style.make(
         ~fontWeight="normal",
-        ~textAlign="center",
         ~padding="20px 10px 10px 10px",
         (),
       );
@@ -21,7 +20,12 @@ module Header = {
 module Record = {
   let calculatePoints = (r: TeamRecord.t) => 3 * r.wins + r.draws;
 
-  let style = ReactDOMRe.Style.make(~textAlign="center", ~padding="10px", ());
+  let style = ReactDOMRe.Style.make(~padding="10px", ());
+  let leftAligned =
+    ReactDOMRe.Style.combine(
+      style,
+      ReactDOMRe.Style.make(~textAlign="left", ()),
+    );
   let bold =
     ReactDOMRe.Style.combine(
       style,
@@ -32,7 +36,7 @@ module Record = {
     <tr>
       {[
          (string_of_int(position + 1), style),
-         (r.name, style),
+         (r.name, leftAligned),
          (string_of_int(r.wins + r.draws + r.losses), style),
          (string_of_int(r.wins), style),
          (string_of_int(r.draws), style),
@@ -48,19 +52,14 @@ module Record = {
     </tr>;
   };
 
-  let separatingRow =
-    ReactDOMRe.Style.make(
-      ~borderTop="1px rgba(0, 0, 0, 0.2) solid",
-      ~padding="0px 0px -20px -20px",
-      ~marginLeft="-20%",
-      (),
-    );
-
-  let rowWithSeparater = (position, r: TeamRecord.t) =>
+  let rowWithSeparater = (position, r: TeamRecord.t) => {
+    let separatingRow =
+      ReactDOMRe.Style.make(~borderTop="1px rgba(0, 0, 0, 0.2) solid", ());
     ReactDOMRe.createElement(
       ReasonReact.fragment,
       [|<tr style=separatingRow />, recordRow(position, r)|],
     );
+  };
 
   [@react.component]
   let make = (~position: int, ~r: TeamRecord.t) => {
@@ -73,12 +72,13 @@ module Record = {
 
 [@react.component]
 let make = (~records) => {
-  let style =
+  let tableStyle =
     ReactDOMRe.Style.make(
       ~backgroundColor="white",
       ~borderCollapse="collapse",
       ~margin="0 auto",
       ~padding="100px 0px",
+      ~textAlign="center",
       ~width="95%",
       (),
     );
@@ -93,7 +93,7 @@ let make = (~records) => {
     );
 
   <div style=containerStyle>
-    <table style>
+    <table style=tableStyle>
       <Header />
       {records
        |> List.mapi((position, r) => <Record position r />)
