@@ -1,4 +1,4 @@
-let tableStub: list(TeamRecord.t) = [
+let tableStub: list(Shared__TeamRecord.t) = [
   {
     name: "Liverpool",
     wins: 29,
@@ -26,19 +26,4 @@ let tableStub: list(TeamRecord.t) = [
 ];
 
 [@react.component]
-let make = () => {
-  <div>
-     <Table records=tableStub /> </div>;
-    // </Container>
-    //   <ReasonUsingJSUsingReason />
-    // <Container title="Reason Using JS Using Reason">
-    // </Container>
-    //   <FetchedDogPictures />
-    // <Container title="Fetched Dog Pictures">
-    // </Container>
-    //   <ReducerFromReactJSDocs />
-    // <Container title="Reducer From ReactJS Docs">
-    // </Container>
-    //   <BlinkingGreeting> {React.string("Hello!")} </BlinkingGreeting>
-    // <Container title="Blinking Greeting">
-};
+let make = () => <Table records=tableStub />;

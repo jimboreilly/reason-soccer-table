@@ -18,7 +18,7 @@ module Header = {
 };
 
 module RecordRow = {
-  let calculatePoints = (r: TeamRecord.t) => 3 * r.wins + r.draws;
+  let calculatePoints = (r: Shared.TeamRecord.t) => 3 * r.wins + r.draws;
 
   let style = ReactDOMRe.Style.make(~padding="10px", ());
   let leftAligned =
@@ -48,7 +48,7 @@ module RecordRow = {
   };
 
   [@react.component]
-  let make = (~position, ~r: TeamRecord.t) => {
+  let make = (~position, ~r: Shared.TeamRecord.t) => {
     let (state, dispatch) = React.useReducer(reducer, initialState);
 
     let selectedRowStyle =
@@ -90,7 +90,7 @@ module RecordRow = {
 };
 
 module Record = {
-  let rowWithSeparater = (position, r: TeamRecord.t) => {
+  let rowWithSeparater = (position, r: Shared.TeamRecord.t) => {
     let separatingRow =
       ReactDOMRe.Style.make(~borderTop="1px rgba(0, 0, 0, 0.2) solid", ());
     ReactDOMRe.createElement(
@@ -100,7 +100,7 @@ module Record = {
   };
 
   [@react.component]
-  let make = (~position: int, ~r: TeamRecord.t) => {
+  let make = (~position: int, ~r: Shared.TeamRecord.t) => {
     switch (position) {
     | 0 => <RecordRow position r />
     | _ => rowWithSeparater(position, r)

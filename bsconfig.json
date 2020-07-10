@@ -10,7 +10,11 @@
     },
     {
       "dir": "backend",
-      "subdirs": true
+      "subdirs": false
+    },
+    {
+      "dir": "shared",
+      "subdirs": false
     }
   ],
   "bsc-flags": [

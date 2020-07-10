@@ -36,9 +36,9 @@ var tableStub = {
 };
 
 function App(Props) {
-  return React.createElement("div", undefined, React.createElement(Table$ReasonSoccerTable.make, {
-                  records: tableStub
-                }));
+  return React.createElement(Table$ReasonSoccerTable.make, {
+              records: tableStub
+            });
 }
 
 var make = App;
