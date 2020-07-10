@@ -5,7 +5,7 @@
   },
   "sources": [
     {
-      "dir": "src",
+      "dir": "frontend/src",
       "subdirs": true
     },
     {
