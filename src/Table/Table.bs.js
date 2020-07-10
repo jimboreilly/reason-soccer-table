@@ -2,6 +2,7 @@
 
 var List = require("bs-platform/lib/js/list.js");
 var $$Array = require("bs-platform/lib/js/array.js");
+var Curry = require("bs-platform/lib/js/curry.js");
 var React = require("react");
 
 function Table$Header(Props) {
@@ -66,8 +67,43 @@ var bold = Object.assign({}, style, {
       fontWeight: "bold"
     });
 
-function recordRow(position, r) {
-  return React.createElement("tr", undefined, $$Array.of_list(List.map((function (param) {
+var initialState = {
+  hover: false
+};
+
+function reducer(_state, action) {
+  if (action) {
+    return {
+            hover: false
+          };
+  } else {
+    return {
+            hover: true
+          };
+  }
+}
+
+function Table$RecordRow(Props) {
+  var position = Props.position;
+  var r = Props.r;
+  var match = React.useReducer(reducer, initialState);
+  var dispatch = match[1];
+  var selectedRowStyle = match[0].hover ? ({
+        backgroundColor: "rgba(0,0,0,0.2)",
+        transition: "background-color 0.5s"
+      }) : ({
+        backgroundColor: "white",
+        transition: "background-color  0.75s"
+      });
+  return React.createElement("tr", {
+              style: selectedRowStyle,
+              onMouseEnter: (function (_event) {
+                  return Curry._1(dispatch, /* Enter */0);
+                }),
+              onMouseLeave: (function (_event) {
+                  return Curry._1(dispatch, /* Leave */1);
+                })
+            }, $$Array.of_list(List.map((function (param) {
                         return React.createElement("td", {
                                     style: param[1]
                                   }, param[0]);
@@ -134,13 +170,26 @@ function recordRow(position, r) {
                     })));
 }
 
+var RecordRow = {
+  calculatePoints: calculatePoints,
+  style: style,
+  leftAligned: leftAligned,
+  bold: bold,
+  initialState: initialState,
+  reducer: reducer,
+  make: Table$RecordRow
+};
+
 function rowWithSeparater(position, r) {
   var separatingRow = {
     borderTop: "1px rgba(0, 0, 0, 0.2) solid"
   };
   return React.createElement(React.Fragment, undefined, React.createElement("tr", {
                   style: separatingRow
-                }), recordRow(position, r));
+                }), React.createElement(Table$RecordRow, {
+                  position: position,
+                  r: r
+                }));
 }
 
 function Table$Record(Props) {
@@ -149,16 +198,14 @@ function Table$Record(Props) {
   if (position !== 0) {
     return rowWithSeparater(position, r);
   } else {
-    return recordRow(position, r);
+    return React.createElement(Table$RecordRow, {
+                position: position,
+                r: r
+              });
   }
 }
 
 var Record = {
-  calculatePoints: calculatePoints,
-  style: style,
-  leftAligned: leftAligned,
-  bold: bold,
-  recordRow: recordRow,
   rowWithSeparater: rowWithSeparater,
   make: Table$Record
 };
@@ -194,6 +241,7 @@ function Table(Props) {
 var make = Table;
 
 exports.Header = Header;
+exports.RecordRow = RecordRow;
 exports.Record = Record;
 exports.make = make;
 /* leftAligned Not a pure module */
