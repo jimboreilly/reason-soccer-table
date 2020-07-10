@@ -218,11 +218,11 @@ function Table(Props) {
     margin: "0 auto",
     padding: "100px 0px",
     textAlign: "center",
-    width: "95%"
+    width: "100%"
   };
   var containerStyle = {
     backgroundColor: "white",
-    padding: "20px 0px 20px 0px",
+    padding: "15px 0px 15px 0px",
     width: "700px",
     borderRadius: "15px",
     alignItems: "center"

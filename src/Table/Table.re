@@ -117,7 +117,7 @@ let make = (~records) => {
       ~margin="0 auto",
       ~padding="100px 0px",
       ~textAlign="center",
-      ~width="95%",
+      ~width="100%",
       (),
     );
 
@@ -126,7 +126,7 @@ let make = (~records) => {
       ~alignItems="center",
       ~backgroundColor="white",
       ~borderRadius="15px",
-      ~padding="20px 0px 20px 0px",
+      ~padding="15px 0px 15px 0px",
       ~width="700px",
       (),
     );
