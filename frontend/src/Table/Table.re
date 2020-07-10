@@ -75,7 +75,7 @@ module RecordRow = {
          (r.wins, style),
          (r.draws, style),
          (r.losses, style),
-         (r.played, bold),
+         (r.points, bold),
          (r.goalsFor, style),
          (r.goalsAgainst, style),
          (r.goalDifferential, style),

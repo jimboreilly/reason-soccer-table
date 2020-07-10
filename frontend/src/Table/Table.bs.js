@@ -135,7 +135,7 @@ function Table$RecordRow(Props) {
                                 ],
                                 tl: {
                                   hd: [
-                                    r.played,
+                                    r.points,
                                     bold
                                   ],
                                   tl: {
