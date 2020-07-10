@@ -4,7 +4,7 @@ module Header = {
     let style =
       ReactDOMRe.Style.make(
         ~fontWeight="normal",
-        ~padding="20px 10px 10px 10px",
+        ~padding="0px 10px 10px 10px",
         (),
       );
 
@@ -126,6 +126,7 @@ let make = (~records) => {
       ~alignItems="center",
       ~backgroundColor="white",
       ~borderRadius="15px",
+      ~padding="20px 0px 20px 0px",
       ~width="700px",
       (),
     );

@@ -8,7 +8,7 @@ var React = require("react");
 function Table$Header(Props) {
   var style = {
     fontWeight: "normal",
-    padding: "20px 10px 10px 10px"
+    padding: "0px 10px 10px 10px"
   };
   return React.createElement("tr", undefined, $$Array.of_list(List.map((function (headerName) {
                         return React.createElement("th", {
@@ -222,6 +222,7 @@ function Table(Props) {
   };
   var containerStyle = {
     backgroundColor: "white",
+    padding: "20px 0px 20px 0px",
     width: "700px",
     borderRadius: "15px",
     alignItems: "center"
