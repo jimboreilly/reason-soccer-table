@@ -3,10 +3,16 @@
   "reason": {
     "react-jsx": 3
   },
-  "sources": {
-    "dir": "src",
-    "subdirs": true
-  },
+  "sources": [
+    {
+      "dir": "src",
+      "subdirs": true
+    },
+    {
+      "dir": "backend",
+      "subdirs": true
+    }
+  ],
   "bsc-flags": [
     "-bs-super-errors",
     "-bs-no-version-header"
@@ -20,6 +26,7 @@
   "suffix": ".bs.js",
   "namespace": true,
   "bs-dependencies": [
+    "bs-express",
     "reason-react"
   ],
   "refmt": 3
