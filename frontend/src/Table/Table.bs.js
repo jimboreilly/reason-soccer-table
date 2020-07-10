@@ -51,10 +51,6 @@ var Header = {
   make: Table$Header
 };
 
-function calculatePoints(r) {
-  return Math.imul(3, r.wins) + r.draws | 0;
-}
-
 var style = {
   padding: "10px"
 };
@@ -119,42 +115,42 @@ function Table$RecordRow(Props) {
                         ],
                         tl: {
                           hd: [
-                            String((r.wins + r.draws | 0) + r.losses | 0),
+                            r.played,
                             style
                           ],
                           tl: {
                             hd: [
-                              String(r.wins),
+                              r.wins,
                               style
                             ],
                             tl: {
                               hd: [
-                                String(r.draws),
+                                r.draws,
                                 style
                               ],
                               tl: {
                                 hd: [
-                                  String(r.losses),
+                                  r.losses,
                                   style
                                 ],
                                 tl: {
                                   hd: [
-                                    String(calculatePoints(r)),
+                                    r.played,
                                     bold
                                   ],
                                   tl: {
                                     hd: [
-                                      String(r.goalsFor),
+                                      r.goalsFor,
                                       style
                                     ],
                                     tl: {
                                       hd: [
-                                        String(r.goalsAgainst),
+                                        r.goalsAgainst,
                                         style
                                       ],
                                       tl: {
                                         hd: [
-                                          String(r.goalsFor - r.goalsAgainst | 0),
+                                          r.goalDifferential,
                                           style
                                         ],
                                         tl: /* [] */0
@@ -171,7 +167,6 @@ function Table$RecordRow(Props) {
 }
 
 var RecordRow = {
-  calculatePoints: calculatePoints,
   style: style,
   leftAligned: leftAligned,
   bold: bold,

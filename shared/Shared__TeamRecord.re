@@ -1,8 +1,11 @@
 type t = {
   name: string,
-  wins: int,
-  draws: int,
-  losses: int,
-  goalsFor: int,
-  goalsAgainst: int,
+  played: string,
+  wins: string,
+  draws: string,
+  losses: string,
+  points: string,
+  goalsFor: string,
+  goalsAgainst: string,
+  goalDifferential: string,
 };

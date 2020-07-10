@@ -18,8 +18,6 @@ module Header = {
 };
 
 module RecordRow = {
-  let calculatePoints = (r: Shared.TeamRecord.t) => 3 * r.wins + r.draws;
-
   let style = ReactDOMRe.Style.make(~padding="10px", ());
   let leftAligned =
     ReactDOMRe.Style.combine(
@@ -73,14 +71,14 @@ module RecordRow = {
       {[
          (string_of_int(position + 1), style),
          (r.name, leftAligned),
-         (string_of_int(r.wins + r.draws + r.losses), style),
-         (string_of_int(r.wins), style),
-         (string_of_int(r.draws), style),
-         (string_of_int(r.losses), style),
-         (string_of_int(calculatePoints(r)), bold),
-         (string_of_int(r.goalsFor), style),
-         (string_of_int(r.goalsAgainst), style),
-         (string_of_int(r.goalsFor - r.goalsAgainst), style),
+         (r.played, style),
+         (r.wins, style),
+         (r.draws, style),
+         (r.losses, style),
+         (r.played, bold),
+         (r.goalsFor, style),
+         (r.goalsAgainst, style),
+         (r.goalDifferential, style),
        ]
        |> List.map(((v, style)) => <td style> {React.string(v)} </td>)
        |> Array.of_list

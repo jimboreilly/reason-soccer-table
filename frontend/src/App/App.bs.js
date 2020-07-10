@@ -6,29 +6,38 @@ var Table$ReasonSoccerTable = require("../Table/Table.bs.js");
 var tableStub = {
   hd: {
     name: "Liverpool",
-    wins: 29,
-    draws: 2,
-    losses: 2,
-    goalsFor: 72,
-    goalsAgainst: 25
+    played: "34",
+    wins: "30",
+    draws: "2",
+    losses: "2",
+    points: "92",
+    goalsFor: "75",
+    goalsAgainst: "26",
+    goalDifferential: "+49"
   },
   tl: {
     hd: {
       name: "Manchester City",
-      wins: 21,
-      draws: 3,
-      losses: 9,
-      goalsFor: 81,
-      goalsAgainst: 34
+      played: "34",
+      wins: "22",
+      draws: "3",
+      losses: "9",
+      points: "69",
+      goalsFor: "86",
+      goalsAgainst: "34",
+      goalDifferential: "+52"
     },
     tl: {
       hd: {
         name: "Chelsea",
-        wins: 18,
-        draws: 6,
-        losses: 10,
-        goalsFor: 63,
-        goalsAgainst: 46
+        played: "34",
+        wins: "18",
+        draws: "6",
+        losses: "10",
+        points: "60",
+        goalsFor: "64",
+        goalsAgainst: "46",
+        goalDifferential: "+17"
       },
       tl: /* [] */0
     }
