@@ -9,6 +9,7 @@ DotNetEnv.Env.Load()
 
 type TableRecord = {
   Name: string;
+  CrestUrl: string;
   Played: string;
   Wins: string;
   Draws: string;
@@ -59,11 +60,35 @@ type CompetitionInfo = {
 
 let host = "https://api.football-data.org/v2/competitions/2021/standings?standingType=TOTAL";
 
+let signGoalDifference diff = 
+    match diff with
+    | positiveGd when diff > 0 -> sprintf "+%i" positiveGd
+    | negativeGd when diff < 0 -> sprintf "-%i" negativeGd
+    | _ -> "0"
+
+let tableFromApiResponse (response:CompetitionInfo) =
+    response.Standings.Head.Table
+    |> List.map(fun teamResult -> 
+    {
+        Name= teamResult.Team.Name;
+        CrestUrl= teamResult.Team.CrestUrl;
+        Played= string teamResult.PlayedGames;
+        Wins= string teamResult.Won;
+        Draws= string teamResult.Draw;
+        Losses= string teamResult.Lost;
+        Points= string teamResult.Points;
+        GoalsFor= string teamResult.GoalsFor;
+        GoalsAgainst= string teamResult.GoalsAgainst;
+        GoalDifferential= signGoalDifference teamResult.GoalDifference;
+    })
+
+
 let getTable () = 
     Http.RequestString
         (host, 
         headers= [ "X-Auth-Token", Environment.GetEnvironmentVariable("token")])
     |> JsonConvert.DeserializeObject<CompetitionInfo>
+    |> tableFromApiResponse
 
 let tableController = controller {
     index (fun ctx -> (getTable()) |> Controller.json ctx)
