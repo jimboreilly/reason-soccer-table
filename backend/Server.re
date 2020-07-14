@@ -1,22 +1,23 @@
 open Express;
 
-let makeSuccessJson = () => {
-  let json = Js.Dict.empty();
-  Js.Dict.set(json, "success", Js.Json.boolean(true));
-  Js.Json.object_(json);
+type team = {
+  name: string,
+  crestUrl: string,
 };
 
-let app = express();
+type teamRecord = {
+  team,
+  playedGames: int,
+  won: int,
+  draw: int,
+  lost: int,
+  points: int,
+  goalsFor: int,
+  goalsAgainst: int,
+  goalDifference: int,
+};
 
-App.get(app, ~path="/") @@
-Middleware.from((next, req) =>
-  switch (Request.baseUrl(req)) {
-  | "" => Response.sendJson(makeSuccessJson())
-  | _ => next(Next.route)
-  }
-);
-
-//let calculatePoints = (r: Shared.TeamRecord.t) => 3 * r.wins + r.draws;
+type table = array(teamRecord);
 
 let tableStub: list(Shared__TeamRecord.t) = [
   {
@@ -77,6 +78,8 @@ let tableJson = (records: list(Shared__TeamRecord.t)) => {
   |> Js.Json.objectArray;
 };
 
+let app = express();
+
 App.get(app, ~path="/test") @@
 Middleware.from((next, req) =>
   switch (Request.baseUrl(req)) {
@@ -84,6 +87,28 @@ Middleware.from((next, req) =>
   | _ => next(Next.route)
   }
 );
+
+/*
+  To be figured out: All Fetch calls return a Js.Promise where processing the
+  response is handled in the callback. Problem being the return result of the Middlewhere needs
+  to match on all paths, need to essentially do a JS `await`. Solutions I've seen that handle this well
+  compile to native, which I am not trying to do today.
+ */
+
+// App.get(app, ~path="/table") @@
+// Middleware.from((next, req) =>
+//   switch (Request.baseUrl(req)) {
+//   | "" =>
+//     let foo =
+//       Js.Promise.(
+//         Fetch.fetch("https://dog.ceo/api/breeds/image/random/3")
+//         |> then_(response => Fetch.Response.ok(response) |> resolve)
+//       );
+//     ();
+
+//   | _ => next(Next.route)
+//   }
+// );
 
 let onListen = e =>
   switch (e) {

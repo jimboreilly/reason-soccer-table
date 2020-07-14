@@ -31,6 +31,7 @@
   "namespace": true,
   "bs-dependencies": [
     "bs-express",
+    "bs-fetch",
     "reason-react"
   ],
   "refmt": 3

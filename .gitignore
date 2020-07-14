@@ -1,3 +1,11 @@
+.env
+
+.ionide/
+
+backend/bin/
+backend/obj
+
+
 .DS_Store
 .merlin
 .bsb.lock

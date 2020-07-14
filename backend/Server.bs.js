@@ -8,25 +8,6 @@ var Express = require("bs-express/src/Express.js");
 var Process = require("process");
 var Caml_js_exceptions = require("bs-platform/lib/js/caml_js_exceptions.js");
 
-function makeSuccessJson(param) {
-  var json = {};
-  json["success"] = true;
-  return json;
-}
-
-var app = Express.express(undefined);
-
-Express.App.get(app, "/", Express.Middleware.from(function (next, req) {
-          var match = Express.$$Request.baseUrl(req);
-          if (match !== "") {
-            return Curry._1(next, Express.Next.route);
-          }
-          var partial_arg = makeSuccessJson(undefined);
-          return function (param) {
-            return Express.$$Response.sendJson(partial_arg, param);
-          };
-        }));
-
 var tableStub = {
   hd: {
     name: "Liverpool",
@@ -84,6 +65,8 @@ function tableJson(records) {
                   }), records));
 }
 
+var app = Express.express(undefined);
+
 Express.App.get(app, "/test", Express.Middleware.from(function (next, req) {
           var match = Express.$$Request.baseUrl(req);
           if (match !== "") {
@@ -114,10 +97,9 @@ function onListen(e) {
 
 var server = Express.App.listen(app, 3000, undefined, onListen, undefined);
 
-exports.makeSuccessJson = makeSuccessJson;
-exports.app = app;
 exports.tableStub = tableStub;
 exports.tableJson = tableJson;
+exports.app = app;
 exports.onListen = onListen;
 exports.server = server;
 /* app Not a pure module */
