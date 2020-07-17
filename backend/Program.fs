@@ -107,7 +107,7 @@ let configureCors (builder: CorsPolicyBuilder) =
 
 let app = application {
     use_router tableRouter
-    use_cors configureCors
+    use_cors "localhost:8000" configureCors
 }
 
 run app
