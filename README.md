@@ -40,7 +40,7 @@ yarn run server
 
 ### Backend
 
-create a `.env` file in the `/backend/` directory with your https://www.football-data.org/ API token
+create a `.env` file in the `/backend/` directory with your https://www.football-data.org/ API token (if the program doesn't find one, it just uses a stub response!)
 ```sh
 # /backend/.env
 token=<this is your token>
