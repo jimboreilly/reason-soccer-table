@@ -4,6 +4,7 @@ open Giraffe
 open Newtonsoft.Json
 open Saturn
 open System
+open System.IO;
 open Microsoft.AspNetCore.Cors.Infrastructure
 
 DotNetEnv.Env.Load()
@@ -84,19 +85,32 @@ let tableFromApiResponse (response:CompetitionInfo) =
     })
 
 
-let getTable () = 
-    Http.RequestString
-        (host, 
-        headers= [ "X-Auth-Token", Environment.GetEnvironmentVariable("token")])
+let getTable (token) = 
+    let json = 
+        match token with
+            | Some t ->
+                Http.RequestString
+                    (host, 
+                    headers= [ "X-Auth-Token", t])
+            | None ->
+                File.ReadAllText @".\table.json"
+    json
     |> JsonConvert.DeserializeObject<CompetitionInfo>
     |> tableFromApiResponse
 
+let getAuthToken () =
+    let token = Environment.GetEnvironmentVariable("token")
+    if String.IsNullOrEmpty token then
+        None
+    else
+        Some(token)
+
 let tableController = controller {
-    index (fun ctx -> (getTable()) |> Controller.json ctx)
+    index (fun ctx -> (getAuthToken () |> getTable |> Controller.json ctx))
 }
 
 let tableRouter = router {
-    get "/" (json (getTable()))
+    get "/" tableController
 }
 
 let configureCors (builder: CorsPolicyBuilder) =
