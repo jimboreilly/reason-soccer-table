@@ -4,6 +4,7 @@ open Giraffe
 open Newtonsoft.Json
 open Saturn
 open System
+open Microsoft.AspNetCore.Cors.Infrastructure
 
 DotNetEnv.Env.Load()
 
@@ -98,8 +99,15 @@ let tableRouter = router {
     get "/" (json (getTable()))
 }
 
+let configureCors (builder: CorsPolicyBuilder) =
+    builder.WithOrigins("http://localhost:8000")
+        .AllowAnyMethod()
+        .AllowAnyHeader()
+    |> ignore
+
 let app = application {
     use_router tableRouter
+    use_cors configureCors
 }
 
 run app
