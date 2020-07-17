@@ -112,7 +112,7 @@ type state =
   | LoadedTable(array(Shared__TeamRecord.t));
 
 [@react.component]
-let make = (~records) => {
+let make = () => {
   let tableStyle =
     ReactDOMRe.Style.make(
       ~backgroundColor="white",

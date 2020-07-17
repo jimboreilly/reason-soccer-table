@@ -207,7 +207,6 @@ var Record = {
 };
 
 function Table(Props) {
-  Props.records;
   var tableStyle = {
     backgroundColor: "white",
     borderCollapse: "collapse",
