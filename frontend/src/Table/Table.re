@@ -106,6 +106,11 @@ module Record = {
   };
 };
 
+type state =
+  | LoadingTable
+  | ErrorFetchingTable
+  | LoadedTable(array(Shared__TeamRecord.t));
+
 [@react.component]
 let make = (~records) => {
   let tableStyle =
@@ -129,13 +134,39 @@ let make = (~records) => {
       (),
     );
 
+  let (state, setState) = React.useState(() => LoadingTable);
+
+  React.useEffect0(() => {
+    Js.Promise.(
+      Fetch.fetch("http://localhost:5000/")
+      |> then_(Fetch.Response.json)
+      |> then_(json => {
+           let table = json |> Shared__TeamRecord.Decode.ts;
+           setState(_previousState => LoadedTable(table));
+           Js.Promise.resolve();
+         })
+      |> catch(err => {
+           Js.log(err);
+           setState(_previousState => ErrorFetchingTable);
+           Js.Promise.resolve();
+         })
+      |> ignore
+    );
+
+    None;
+  });
+
   <div style=containerStyle>
-    <table style=tableStyle>
-      <Header />
-      {records
-       |> List.mapi((position, r) => <Record position r />)
-       |> Array.of_list
-       |> ReasonReact.array}
-    </table>
+    {switch (state) {
+     | ErrorFetchingTable => React.string("An error occurred!")
+     | LoadingTable => React.string("Loading...")
+     | LoadedTable(table) =>
+       <table style=tableStyle>
+         <Header />
+         {table
+          |> Array.mapi((position, r) => <Record position r />)
+          |> ReasonReact.array}
+       </table>
+     }}
   </div>;
 };

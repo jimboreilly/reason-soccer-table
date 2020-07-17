@@ -32,6 +32,7 @@
   "bs-dependencies": [
     "bs-express",
     "bs-fetch",
+    "@glennsl/bs-json",
     "reason-react"
   ],
   "refmt": 3
