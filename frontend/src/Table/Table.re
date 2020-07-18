@@ -10,7 +10,9 @@ module Header = {
 
     <tr>
       {["", "Club", "P", "W", "D", "L", "Pts", "GF", "GA", "GD"]
-       |> List.map(headerName => <th style> {React.string(headerName)} </th>)
+       |> List.map(headerName =>
+            <th key=headerName style> {React.string(headerName)} </th>
+          )
        |> Array.of_list
        |> ReasonReact.array}
     </tr>;
@@ -80,7 +82,11 @@ module RecordRow = {
          (r.goalsAgainst, style),
          (r.goalDifferential, style),
        ]
-       |> List.map(((v, style)) => <td style> {React.string(v)} </td>)
+       |> List.mapi((i, (v, style)) =>
+            <td key={r.name ++ string_of_int(i)} style>
+              {React.string(v)}
+            </td>
+          )
        |> Array.of_list
        |> ReasonReact.array}
     </tr>;
@@ -106,13 +112,8 @@ module Record = {
   };
 };
 
-type state =
-  | LoadingTable
-  | ErrorFetchingTable
-  | LoadedTable(array(Shared__TeamRecord.t));
-
 [@react.component]
-let make = () => {
+let make = (~records) => {
   let tableStyle =
     ReactDOMRe.Style.make(
       ~backgroundColor="white",
@@ -134,39 +135,14 @@ let make = () => {
       (),
     );
 
-  let (state, setState) = React.useState(() => LoadingTable);
-
-  React.useEffect0(() => {
-    Js.Promise.(
-      Fetch.fetch("http://localhost:5000/")
-      |> then_(Fetch.Response.json)
-      |> then_(json => {
-           let table = json |> Shared__TeamRecord.Decode.ts;
-           setState(_previousState => LoadedTable(table));
-           Js.Promise.resolve();
-         })
-      |> catch(err => {
-           Js.log(err);
-           setState(_previousState => ErrorFetchingTable);
-           Js.Promise.resolve();
-         })
-      |> ignore
-    );
-
-    None;
-  });
-
   <div style=containerStyle>
-    {switch (state) {
-     | ErrorFetchingTable => React.string("An error occurred!")
-     | LoadingTable => React.string("Loading...")
-     | LoadedTable(table) =>
-       <table style=tableStyle>
-         <Header />
-         {table
-          |> Array.mapi((position, r) => <Record position r />)
-          |> ReasonReact.array}
-       </table>
-     }}
+    <table style=tableStyle>
+      <thead> <Header /> </thead>
+      <tbody>
+        {records
+         |> Array.mapi((position, r) => <Record key={r.name} position r />)
+         |> ReasonReact.array}
+      </tbody>
+    </table>
   </div>;
 };
