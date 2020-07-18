@@ -19,9 +19,11 @@ type teamRecord = {
 
 type table = array(teamRecord);
 
+//TODO: convert this entire proces to an encode defined in the shared types module
 let tableStub: list(Shared__TeamRecord.t) = [
   {
     name: "Liverpool",
+    crestUrl: "https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg",
     played: "34",
     wins: "30",
     draws: "2",
@@ -31,28 +33,6 @@ let tableStub: list(Shared__TeamRecord.t) = [
     goalsAgainst: "26",
     goalDifferential: "+49",
   },
-  {
-    name: "Manchester City",
-    played: "34",
-    wins: "22",
-    draws: "3",
-    losses: "9",
-    points: "69",
-    goalsFor: "86",
-    goalsAgainst: "34",
-    goalDifferential: "+52",
-  },
-  {
-    name: "Chelsea",
-    played: "34",
-    wins: "18",
-    draws: "6",
-    losses: "10",
-    points: "60",
-    goalsFor: "64",
-    goalsAgainst: "46",
-    goalDifferential: "+17",
-  },
 ];
 
 let tableJson = (records: list(Shared__TeamRecord.t)) => {
@@ -60,6 +40,7 @@ let tableJson = (records: list(Shared__TeamRecord.t)) => {
   |> List.map((r: Shared__TeamRecord.t) => {
        let json = Js.Dict.empty();
        Js.Dict.set(json, "name", Js.Json.string(r.name));
+       Js.Dict.set(json, "crestUrl", Js.Json.string(r.crestUrl));
        Js.Dict.set(json, "played", Js.Json.string(r.played));
        Js.Dict.set(json, "wins", Js.Json.string(r.wins));
        Js.Dict.set(json, "draws", Js.Json.string(r.draws));
