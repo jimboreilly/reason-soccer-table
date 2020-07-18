@@ -53,3 +53,6 @@ cd backend
 dotnet run
 ```
 
+## Run
+
+If you don't want to get an API key, then the backend will return a stubbed response taken from Matchday 36. If you don't even want to RUN a backend, then the frontend will build from a stubbed response taken from Matchday 36 (it takes a second for the fetch to timeout)
