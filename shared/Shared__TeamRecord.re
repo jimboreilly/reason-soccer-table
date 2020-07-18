@@ -148,7 +148,7 @@ let tExample = [|
     points: "51",
     goalsFor: "40",
     goalsAgainst: "48",
-    goalDifferential: "--8",
+    goalDifferential: "-8",
   },
   {
     name: "Everton FC",
@@ -160,7 +160,7 @@ let tExample = [|
     points: "46",
     goalsFor: "42",
     goalsAgainst: "53",
-    goalDifferential: "--11",
+    goalDifferential: "-11",
   },
   {
     name: "Southampton FC",
@@ -172,7 +172,7 @@ let tExample = [|
     points: "46",
     goalsFor: "46",
     goalsAgainst: "59",
-    goalDifferential: "--13",
+    goalDifferential: "-13",
   },
   {
     name: "Newcastle United FC",
@@ -184,7 +184,7 @@ let tExample = [|
     points: "43",
     goalsFor: "37",
     goalsAgainst: "55",
-    goalDifferential: "--18",
+    goalDifferential: "-18",
   },
   {
     name: "Crystal Palace FC",
@@ -196,7 +196,7 @@ let tExample = [|
     points: "42",
     goalsFor: "30",
     goalsAgainst: "47",
-    goalDifferential: "--17",
+    goalDifferential: "-17",
   },
   {
     name: "West Ham United FC",
@@ -208,7 +208,7 @@ let tExample = [|
     points: "37",
     goalsFor: "47",
     goalsAgainst: "60",
-    goalDifferential: "--13",
+    goalDifferential: "-13",
   },
   {
     name: "Brighton & Hove Albion FC",
@@ -220,7 +220,7 @@ let tExample = [|
     points: "37",
     goalsFor: "37",
     goalsAgainst: "53",
-    goalDifferential: "--16",
+    goalDifferential: "-16",
   },
   {
     name: "Watford FC",
@@ -232,7 +232,7 @@ let tExample = [|
     points: "34",
     goalsFor: "34",
     goalsAgainst: "57",
-    goalDifferential: "--23",
+    goalDifferential: "-23",
   },
   {
     name: "AFC Bournemouth",
@@ -244,7 +244,7 @@ let tExample = [|
     points: "31",
     goalsFor: "37",
     goalsAgainst: "62",
-    goalDifferential: "--25",
+    goalDifferential: "-25",
   },
   {
     name: "Aston Villa FC",
@@ -256,7 +256,7 @@ let tExample = [|
     points: "31",
     goalsFor: "39",
     goalsAgainst: "66",
-    goalDifferential: "--27",
+    goalDifferential: "-27",
   },
   {
     name: "Norwich City FC",
@@ -268,6 +268,6 @@ let tExample = [|
     points: "21",
     goalsFor: "26",
     goalsAgainst: "68",
-    goalDifferential: "--42",
+    goalDifferential: "-42",
   },
 |];

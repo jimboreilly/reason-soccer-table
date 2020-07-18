@@ -65,8 +65,7 @@ let host = "https://api.football-data.org/v2/competitions/2021/standings?standin
 let signGoalDifference diff = 
     match diff with
     | positiveGd when diff > 0 -> sprintf "+%i" positiveGd
-    | negativeGd when diff < 0 -> sprintf "-%i" negativeGd
-    | _ -> "0"
+    | diff -> sprintf "%i" diff
 
 let tableFromApiResponse (response:CompetitionInfo) =
     response.Standings.Head.Table
