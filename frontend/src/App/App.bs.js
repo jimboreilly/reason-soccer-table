@@ -33,16 +33,12 @@ function App(Props) {
               });
           
         }), []);
-  if (typeof state === "number") {
-    if (state !== 0) {
-      return "An error occurred!";
-    } else {
-      return "Loading...";
-    }
-  } else {
+  if (state) {
     return React.createElement(Table$ReasonSoccerTable.make, {
                 records: state._0
               });
+  } else {
+    return "Loading...";
   }
 }
 

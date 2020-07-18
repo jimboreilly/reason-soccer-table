@@ -1,7 +1,7 @@
 type state =
   | LoadingTable
-  | ErrorFetchingTable
   | LoadedTable(array(Shared__TeamRecord.t));
+//| ErrorFetchingTable this state is actually unreachable since errors just return the stubbed response for simplicity
 
 [@react.component]
 let make = () => {
@@ -31,7 +31,6 @@ let make = () => {
 
   switch (state) {
   | LoadingTable => React.string("Loading...")
-  | ErrorFetchingTable => React.string("An error occurred!")
   | LoadedTable(table) => <Table records=table />
   };
 };
